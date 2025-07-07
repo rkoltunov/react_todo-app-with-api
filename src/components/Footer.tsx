@@ -10,26 +10,12 @@ type Props = {
   handleClearCompleted: () => void;
 };
 
-const FILTERS = [
-  {
-    label: 'All',
-    value: StatusFilter.All,
-    dataCy: 'FilterLinkAll',
-    href: '#/',
-  },
-  {
-    label: 'Active',
-    value: StatusFilter.Active,
-    dataCy: 'FilterLinkActive',
-    href: '#/active',
-  },
-  {
-    label: 'Completed',
-    value: StatusFilter.Completed,
-    dataCy: 'FilterLinkCompleted',
-    href: '#/completed',
-  },
-];
+const FILTERS = Object.values(StatusFilter).map(value => ({
+  label: value.charAt(0).toUpperCase() + value.slice(1),
+  value,
+  dataCy: `FilterLink${value.charAt(0).toUpperCase() + value.slice(1)}`,
+  href: `#/${value}`,
+}));
 
 export const Footer: React.FC<Props> = ({
   todos,

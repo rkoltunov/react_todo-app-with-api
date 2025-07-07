@@ -8,11 +8,15 @@ type Props = {
   onDelete: () => void;
 };
 
-export const TodoItem: React.FC<Props> = ({ todo, deleting, onDelete }) => (
+export const TodoItem: React.FC<Props> = ({
+  todo: { title, completed },
+  deleting,
+  onDelete,
+}) => (
   <div
     data-cy="Todo"
     className={classNames('todo', {
-      completed: todo.completed,
+      completed,
       deleting,
     })}
   >
@@ -22,13 +26,13 @@ export const TodoItem: React.FC<Props> = ({ todo, deleting, onDelete }) => (
         data-cy="TodoStatus"
         type="checkbox"
         className="todo__status"
-        checked={todo.completed}
+        checked={completed}
         readOnly
       />
     </label>
 
     <span data-cy="TodoTitle" className="todo__title">
-      {todo.title}
+      {title}
     </span>
 
     <button
